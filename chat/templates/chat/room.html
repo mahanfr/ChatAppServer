@@ -1,8 +1,9 @@
+<!-- This File is only for on server development testing and has nothing to do with web app -->
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Chat Room</title>
+    <title>Chat Room | {{room_name}}</title>
 </head>
 <body>
     <textarea id="chat-log" cols="100" rows="20"></textarea><br>
@@ -10,8 +11,9 @@
     <input id="chat-message-submit" type="button" value="Send">
     {{ room_name|json_script:"room-name" }}
     <script>
+        // Gets room name from application
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
-
+        // Connects to application websocket
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
@@ -19,12 +21,13 @@
             + roomName
             + '/'
         );
-
+        // A websocket function that get's data that passed throgh
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + '\n');
+            console.log(e.data);
+            document.querySelector('#chat-log').value += (data.message.author + ': '+ data.message.content + '\n');
         };
-
+        // A websocket function that observes websocket state
         chatSocket.onclose = function(e) {
             console.error('Chat socket closed unexpectedly');
         };
@@ -35,13 +38,20 @@
                 document.querySelector('#chat-message-submit').click();
             }
         };
-
+        // Sends Massages to server websocket
         document.querySelector('#chat-message-submit').onclick = function(e) {
+            // Get's all inserted text
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
+            // sends message throgh socket
             chatSocket.send(JSON.stringify({
+                'command': 'new_message',
+                //TODO : CHANGE STATIC VALUES
+                'from': 'mahan',
+                'chatId': 1,
                 'message': message
             }));
+            
             messageInputDom.value = '';
         };
     </script>
