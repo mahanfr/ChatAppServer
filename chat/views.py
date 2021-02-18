@@ -3,9 +3,6 @@ from django.contrib.auth.models import User
 from .models import Chat , Contact
 
 # Create your views here.
-def index(request):
-    return render(request, 'chat/index.html')
-
 def room(request, room_name):
     return render(request, 'chat/room.html', {
         'room_name': room_name

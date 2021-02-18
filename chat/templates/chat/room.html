@@ -21,11 +21,26 @@
             + roomName
             + '/'
         );
+
+        chatSocket.onopen = function(e){
+            chatSocket.send(JSON.stringify({
+                'command': 'fetch_messages',
+                //TODO : CHANGE STATIC VALUES
+                'chatId': 1,
+            }));
+        }
+            
         // A websocket function that get's data that passed throgh
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            console.log(e.data);
-            document.querySelector('#chat-log').value += (data.message.author + ': '+ data.message.content + '\n');
+            if(data.command === 'messages'){
+                for(let i=0; i<data.messages.length;i++){
+                    message = data.messages[i];
+                    document.querySelector('#chat-log').value += (message.author + ': '+ message.content + '\n');
+                }
+            }else if(data.command === 'new_message'){
+                document.querySelector('#chat-log').value += (data.message.author + ': '+ data.message.content + '\n');
+            }
         };
         // A websocket function that observes websocket state
         chatSocket.onclose = function(e) {
