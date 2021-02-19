@@ -31,16 +31,25 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    # API APPS
+    'rest_framework',
+    'rest_framework.authtoken',
+    # AUTHENTICATION APPS
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # WEBSOCKET APPS
+    'channels',
+    # LOCAL APPS
     'chat',
     'user',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +82,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chatApp.wsgi.application'
 ASGI_APPLICATION = 'chatApp.asgi.application'
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
@@ -96,6 +106,8 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+SITE_ID = 1
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
