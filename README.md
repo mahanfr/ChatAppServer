@@ -17,14 +17,14 @@ This code is under development and has security issues
 For testing WebSockets you can use <a href="https://github.com/asleepysamurai/socketwrench">Socket Wrench</a></br>
 For testing Api you can use <a href="https://www.postman.com/downloads/">Postman</a></br>
 
-For sending a new message to char "room" you can use this json format
+For sending a new message to char "room" you can use this json format</br>
 MAKE SURE YOU ALREADY MADE A CHAT AND CONTACT INSIDE DATABASE
 ```json
 {
     "command":"new_message",
-    "from":"mahan",
+    "from":"YOUR_NAME",
     "chatId":1,
-    "message":"wellcome to this chat"
+    "message":"YOUR_MESSAGE"
 }
 ```
 For Getting all messages(resent 10) of a room
