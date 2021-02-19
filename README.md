@@ -14,5 +14,23 @@ Make sure to install reddis from https://github.com/tporadowski/redis/releases
 This code is under development and has security issues
 
 ### testing
-For testing WebSockets you can use <a href="https://asleepysamurai.com/articles/socketwrench/binary/SocketWrench-0.0.1-setup.exe">Socket Wrench</a>
-For testing Api you can use PostMan
+For testing WebSockets you can use <a href="https://github.com/asleepysamurai/socketwrench">Socket Wrench</a></br>
+For testing Api you can use <a href="https://www.postman.com/downloads/">Postman</a></br>
+
+For sending a new message to char "room" you can use this json format
+MAKE SURE YOU ALREADY MADE A CHAT AND CONTACT INSIDE DATABASE
+```json
+{
+    "command":"new_message",
+    "from":"mahan",
+    "chatId":1,
+    "message":"wellcome to this chat"
+}
+```
+For Getting all messages(resent 10) of a room
+```json
+{
+    "command":"fetch_messages",
+    "chatId":1
+}
+```
