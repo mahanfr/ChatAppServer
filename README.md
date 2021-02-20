@@ -34,3 +34,19 @@ For Getting all messages(resent 10) of a room
     "chatId":1
 }
 ```
+We can send Api using postman, some of the calls need authentication
+and authentication is using django-simpleJWT so you can get a token from
+```link
+http://127.0.0.1:8000/api/v1/users/token
+```
+authentication works when you add jwt token to your request header
+you can create/add/modify/delete chat by calling:
+```link
+http://127.0.0.1:8000/api/v1/chat/
+```
+calls for create a chat contains username of participants in this fashion
+```json
+{
+    "participants":["USER_1","USER_2"]
+}
+```
