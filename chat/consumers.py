@@ -3,7 +3,7 @@ from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from .models import Message
 from django.contrib.auth.models import User
-from .views import get_last_10_messages, get_user_contact, get_current_chat
+from .utils import get_last_10_messages, get_user_contact, get_current_chat
 
 class ChatConsumer(WebsocketConsumer):
 
